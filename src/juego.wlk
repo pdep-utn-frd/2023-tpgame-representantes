@@ -36,6 +36,7 @@ object resident{
 	method agregarZombie(){
 		const zombie = new Zombie(position = self.posicionAlAzar())
 		game.addVisual(zombie)
+		zombie.perseguir()
 	}
 	
 	method posicionAlAzar(){ //HAY QUE DESARROLLAR ESTO
@@ -115,6 +116,12 @@ object eagle{
 		vida = vida - 1 
 	}
 	
+	method positionX(){
+		return position.x()
+	}
+	method positionY(){
+		return position.y()
+	}
 	
 	
 }
@@ -139,6 +146,10 @@ class Bala{
 		}
 	}
 	
+	method chocoConEagle(){}
+	
+	
+	
 	
 }
 
@@ -149,18 +160,18 @@ class Zombie{
 	
 	
 	method perseguir(){
-		game.onTick(3000,"perseguir",{self.moverse(eagle.position())})
+		game.onTick(3000,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
 	}
 	
-	method moverse(destino){
+	method moverse(destinoX,destinoY){
 		position = game.at(
-			if (position.x() < destino){
+			if (position.x() < destinoX){
 				position.x() + 1
 			}
 			else {
 				position.x() - 1
-			}, //posicion x hay que probar esto
-			if (position.y() < destino){
+			}, 
+			if (position.y() < destinoY){
 				position.y() + 1
 			}
 			else {
@@ -171,7 +182,7 @@ class Zombie{
 	
 	
 	
-	method image() = ""
+	method image() = "zombie.png"
 
 	
 	method chocoConEagle(){

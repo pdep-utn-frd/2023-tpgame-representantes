@@ -3,7 +3,7 @@ import wollok.game.*
 object resident{
 	
 	method iniciar(){
-		game.addVisualCharacter(eagle)
+		game.addVisual(eagle)
 		game.onCollideDo(eagle,{algo => algo.chocoConEagle()})
 		
 		keyboard.w().onPressDo({
@@ -79,21 +79,33 @@ object eagle{
 	}
 	
 	method moverArriba(){
-		ultimaPosicion = 'w'
-		position = position.up(1)
+		if (position.y()==6)
+		{ultimaPosicion = 'w'}
+		else
+		{ultimaPosicion = 'w'
+		position = position.up(1)}
 	}
 	
 	method moverIzquierda(){
-		ultimaPosicion = 'a'
-		position = position.left(1)
+		if (position.x()==0)
+		{ultimaPosicion = 'a'}
+		else
+		{ultimaPosicion = 'a'
+		position = position.left(1)}
 	}
 	method moverAbajo(){
-		ultimaPosicion = 's'
-		position = position.down(1)
+		if (position.y()==0)
+		{ultimaPosicion = 's'}
+		else
+		{ultimaPosicion = 's'
+		position = position.down(1)}
 	}
 	method moverDerecha(){
-		ultimaPosicion = 'd'
-		position = position.right(1)
+		if (position.x()==12)
+		{ultimaPosicion = 'd'}
+		else
+		{ultimaPosicion = 'd'
+		position = position.right(1)}
 	}
 	
 	

@@ -7,7 +7,7 @@ program Jugar{
   	game.height(7)
   	game.cellSize(150)
   	game.title("Resident Eagle")
-  	game.ground("cuadrado.png")
+  	game.boardGround("escenario.jpg")
   	resident.iniciar()
   	game.start()
 	

@@ -5,6 +5,7 @@ object resident{
 	method iniciar(){
 		game.addVisual(eagle)
 		game.onCollideDo(eagle,{algo => algo.chocoConEagle()})
+
 		
 		keyboard.w().onPressDo({
 			eagle.moverArriba()
@@ -72,16 +73,26 @@ object eagle{
 	var property ultimaPosicion = 'w'
 	const property balas = []
 	
-	method image() = "black.png"
+	method image(){
+		if (ultimaPosicion == 'a'){
+			return "black1.png"
+		}
+		else {
+			return "black.png"
+		}
+	} 
+	
 
 	method chocoConEagle(){}
+	method chocoConBala(bala){}
 	
 	method disparar(){
 		
 		const bala = new Bala(position = self.positionSiguiente())
 		game.addVisual(bala)
 		bala.moverse(ultimaPosicion)
-		balas.add(bala) //para despues eliminarlas todas
+		balas.add(bala)//para despues eliminarlas todas
+		game.onCollideDo(bala,{algo => algo.chocoConBala(bala)}) 
 		
 	}
 	
@@ -169,7 +180,7 @@ class Bala{
 	}
 	
 	method chocoConEagle(){}
-	
+	method chocoConBala(bala){}
 	
 	
 	
@@ -185,19 +196,25 @@ class Zombie{
 		game.onTick(3000,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
 	}
 	
-	method moverse(destinoX,destinoY){
+	method moverse(destinoX,destinoY){// error, se mueven en diagonal
 		position = game.at(
-			if (position.x() < destinoX){
+			if (position.x() > destinoX){
+				position.x() - 1
+			}
+			else if (position.x() < destinoX){
 				position.x() + 1
 			}
 			else {
-				position.x() - 1
+				position.x() 
 			}, 
-			if (position.y() < destinoY){
+			if (position.y() > destinoY){
+				position.y() - 1
+			}
+			else if (position.y() < destinoY){
 				position.y() + 1
 			}
 			else {
-				position.y() - 1
+				position.y() 
 			}
 		)
 	}
@@ -211,9 +228,19 @@ class Zombie{
 		eagle.ataqueDeZombie()
 	}
 	
+	method chocoConBala(bala){
+		vida = vida - 1
+		game.removeVisual(bala)
+		if (vida == 0){
+			self.morir()
+		}
+	}
 	
 	
 	
+	method morir(){
+		game.removeVisual(self)
+	}
 	
 	
 }

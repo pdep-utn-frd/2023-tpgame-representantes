@@ -27,6 +27,7 @@ object resident{
 		self.generarEnemigos()
 		
 		
+		
 	}
 	
 	method generarEnemigos(){
@@ -51,6 +52,12 @@ object resident{
 	}
 	//tablero
 	
+	method terminarJuego(){
+		game.removeTickEvent("agregarZombie")
+		game.clear()
+		game.addVisual(cartelDeDerrota)
+	}
+	 
 	
 	
 	
@@ -125,7 +132,10 @@ object eagle{
 	}
 	
 	method ataqueDeZombie(){
-		vida = vida - 1 
+		vida = vida - 1
+		if (self.vida() == 0){
+		resident.terminarJuego()
+		}
 	}
 	
 	method positionX(){
@@ -207,3 +217,12 @@ class Zombie{
 	
 	
 }
+
+
+
+
+object cartelDeDerrota{
+	
+}
+
+

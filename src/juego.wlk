@@ -56,10 +56,15 @@ object resident{
 	method terminarJuego(){
 		game.removeTickEvent("agregarZombie")
 		game.clear()
-		game.addVisual(cartelDeDerrota)
+		game.addVisual(carteldeDerrota)
+		keyboard.enter().onPressDo({self.reiniciar()})
 	}
 	 
-	
+method reiniciar(){
+	game.clear()
+	eagle.reiniciar()
+	self.iniciar()
+}
 	
 	
 }
@@ -156,7 +161,11 @@ object eagle{
 		return position.y()
 	}
 	
-	
+	method reiniciar(){
+		position = game.origin()
+		vida = 3
+		ultimaPosicion = 'w'
+	}
 }
 
 
@@ -245,11 +254,9 @@ class Zombie{
 	
 }
 
-
-
-
-object cartelDeDerrota{
-	
+object carteldeDerrota {
+	var property position=game.at(5,3)
+	method image()="findejuego.JPG"
 }
 
 

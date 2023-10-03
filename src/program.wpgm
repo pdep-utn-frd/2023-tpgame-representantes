@@ -10,7 +10,4 @@ program Jugar{
   	game.boardGround("escenario.jpg")
   	resident.iniciar()
   	game.start()
-	
-	
-
 }

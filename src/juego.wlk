@@ -27,6 +27,7 @@ object resident{
 		
 		self.generarEnemigos()
 		
+		self.vidas()
 		
 		
 	}
@@ -53,6 +54,12 @@ object resident{
 	}
 	//tablero
 	
+	method vidas(){
+		game.addVisual(corazon1)
+		game.addVisual(corazon2)
+		game.addVisual(corazon3)
+		
+	}
 	method terminarJuego(){
 		game.removeTickEvent("agregarZombie")
 		game.clear()
@@ -149,6 +156,10 @@ object eagle{
 	
 	method ataqueDeZombie(){
 		vida = vida - 1
+		if (self.vida() == 2)
+		{corazon3.perdiovida()}
+		if (self.vida() == 1)
+		{corazon2.perdiovida()}
 		if (self.vida() == 0){
 		resident.terminarJuego()
 		}
@@ -259,4 +270,25 @@ object carteldeDerrota {
 	method image()="findejuego.JPG"
 }
 
+object corazon1 {
+	var property position=game.at(12,6)
+	method image()="corazon.png"
+	method chocoConEagle(){}
+}	
 
+object corazon2 {
+	var property position=game.at(12,5)
+	method image()="corazon.png"
+	method chocoConEagle(){}
+	method perdiovida(){
+		game.removeVisual(self)}
+}
+
+object corazon3 {
+	var property position=game.at(12,4)
+	method image()="corazon.png"
+	method chocoConEagle(){}
+	method perdiovida(){
+		game.removeVisual(self)
+	}
+}

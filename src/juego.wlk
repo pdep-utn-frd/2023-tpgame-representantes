@@ -34,10 +34,16 @@ object resident{
 	
 	method generarEnemigos(){
 		game.onTick(10000,"agregarZombie",{self.agregarZombie()})
+		game.onTick(20000,"agregarMegaZombie",{self.agregarMegaZombie()})
 	}
 	
 	method agregarZombie(){
 		const zombie = new Zombie(position = self.posicionAlAzar())
+		game.addVisual(zombie)
+		zombie.perseguir()
+	}
+	method agregarMegaZombie(){
+		const zombie = new MegaZombie(position = self.posicionAlAzar())
 		game.addVisual(zombie)
 		zombie.perseguir()
 	}
@@ -284,6 +290,19 @@ class Zombie{
 	
 }
 
+class MegaZombie inherits Zombie {
+	override method vida()=10 
+	override method image(){
+		return "NuevoMegazombie.png"
+	}
+	override method morir(){
+		game.removeVisual(self)
+		const zombie = new Zombie(position = self.position())
+		game.addVisual(zombie)
+		zombie.perseguir()
+	}
+	
+}
 
 
 object carteldeDerrota {

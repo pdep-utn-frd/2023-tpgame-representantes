@@ -20,9 +20,18 @@ object resident{
 			eagle.moverDerecha()
 		})
 		
-		
-		keyboard.space().onPressDo({
-			eagle.disparar()
+		keyboard.up().onPressDo({
+			eagle.disparar('w')
+		})
+		keyboard.down().onPressDo({
+			eagle.disparar('s')
+		})
+		keyboard.right().onPressDo({
+			eagle.disparar('d')
+		})
+	
+		keyboard.left().onPressDo({
+			eagle.disparar('a')
 		})
 		
 		keyboard.r().onPressDo({
@@ -60,8 +69,9 @@ object resident{
 		)
 	}
 	
-	// method eliminarTodo(){
+	//method eliminarBalas(){
 		//(eagle.balas()).forEach{ b => game.removeVisual(b)}
+		//game.removeTickEvent("moverseBala")
 	//}
 	//tablero
 	
@@ -92,12 +102,13 @@ method reiniciar(){
 object eagle{
 	var property position = game.origin()
 	var property vida = 3
-	var property luz = 100
 	var property ultimaPosicion = 'w'
 	var property recarga = 0
+	var property apuntado = 'd'
+
 	
 	method image(){
-		if (ultimaPosicion == 'a'){
+		if (ultimaPosicion == 'a' ||apuntado == 'a'){
 			return "black1.png"
 		}
 		else {
@@ -109,14 +120,17 @@ object eagle{
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
 	
-	method disparar(){
+	method disparar(direccion){
 		if (recarga < 5) {
-		const bala = new Bala(position = self.positionSiguiente(),orientacion = self.ultimaPosicion())
+		apuntado = direccion
+		const bala = new Bala(position = self.position(),orientacion = direccion)
 		game.addVisual(bala)
-		bala.moverse(ultimaPosicion)
+		bala.moverse(direccion)
 		game.onCollideDo(bala,{algo => algo.chocoConBala(bala)}) 
 		recarga = recarga + 1
-		game.schedule(2000,{game.removeVisual(bala)})  //SE LAGUEA 
+		//game.schedule(600,{game.removeVisual(bala)})
+		//game.schedule(600,{game.removeTickEvent("moverseBala")})
+		  //SE LAGUEA 
 		}
 	}
 	
@@ -187,7 +201,10 @@ object eagle{
 	
 	
 	method recargar(){
+		if (recarga == 5){
 		recarga = 0
+
+		}
 	}
 	
 	
@@ -212,18 +229,53 @@ class Bala{
 		}
 	}
 	
+	method cambiarPosicionW(){
+		if (position.y() > 8){
+				game.removeVisual(self)
+				game.removeTickEvent("moverseBala")
+			} 
+		position = position.up(1)
+	}
+	method cambiarPosicionA(){
+		if (position.x() < 0){
+				game.removeVisual(self)
+				game.removeTickEvent("moverseBala")
+			} 
+		position = position.left(1)
+	}
+	method cambiarPosicionS(){
+		if (position.y() < 0){
+				game.removeVisual(self)
+				game.removeTickEvent("moverseBala")
+			} 
+		position = position.down(1)
+	}
+	method cambiarPosicionD(){
+		if (position.x() > 14){
+				game.removeVisual(self)
+				game.removeTickEvent("moverseBala")
+			} 
+		position = position.right(1)
+	}
+	
+	
+	
+	
 	method moverse(ultimaPos){
 		if (ultimaPos == 'w'){
-			game.onTick(250,"moverseBala",{position = position.up(1)})
+			game.onTick(100,"moverseBala",{self.cambiarPosicionW()})
 		}
 		else if (ultimaPos == 'a'){
-			game.onTick(250,"moverseBala",{position = position.left(1)})
+			game.onTick(100,"moverseBala",{self.cambiarPosicionA()})
+			
 		}
 		else if (ultimaPos == 's'){
-			game.onTick(250,"moverseBala",{position = position.down(1)})
+			game.onTick(100,"moverseBala",{self.cambiarPosicionS()})
+	
 		}
 		else{
-			game.onTick(250,"moverseBala",{position = position.right(1)})
+			game.onTick(100,"moverseBala",{self.cambiarPosicionD()})
+	
 		}
 	}
 	
@@ -243,26 +295,10 @@ class Zombie{
 		game.onTick(3000,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
 	}
 	
-	method moverse(destinoX,destinoY){// error, se mueven en diagonal preguntar como cambiarlo
+	method moverse(destinoX,destinoY){
 		position = game.at(
-			if (position.x() > destinoX){
-				position.x() - 1
-			}
-			else if (position.x() < destinoX){
-				position.x() + 1
-			}
-			else {
-				position.x() 
-			}, 
-			if (position.y() > destinoY){
-				position.y() - 1
-			}
-			else if (position.y() < destinoY){
-				position.y() + 1
-			}
-			else {
-				position.y() 
-			}
+			position.x() + (destinoX - position.x())/3,
+			position.y() + (destinoY - position.y())/3	
 		)
 	}
 	

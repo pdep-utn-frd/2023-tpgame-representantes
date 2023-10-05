@@ -100,7 +100,7 @@ object eagle{
 	
 	method disparar(){
 		
-		const bala = new Bala(position = self.positionSiguiente())
+		const bala = new Bala(position = self.positionSiguiente(),orientacion = self.ultimaPosicion())
 		game.addVisual(bala)
 		bala.moverse(ultimaPosicion)
 		balas.add(bala)//para despues eliminarlas todas
@@ -182,20 +182,29 @@ object eagle{
 
 class Bala{
 	var property position
-	method image() = "bala.png"
+	var property orientacion
+	
+	method image(){
+		if (orientacion == 'w' or orientacion == 's'){
+			return "bala.png"
+		}
+		else {
+			return "bala1.png"
+		}
+	}
 	
 	method moverse(ultimaPos){
 		if (ultimaPos == 'w'){
-			game.onTick(500,"moverseBala",{position = position.up(1)})
+			game.onTick(250,"moverseBala",{position = position.up(1)})
 		}
 		else if (ultimaPos == 'a'){
-			game.onTick(500,"moverseBala",{position = position.left(1)})
+			game.onTick(250,"moverseBala",{position = position.left(1)})
 		}
 		else if (ultimaPos == 's'){
-			game.onTick(500,"moverseBala",{position = position.down(1)})
+			game.onTick(250,"moverseBala",{position = position.down(1)})
 		}
 		else{
-			game.onTick(500,"moverseBala",{position = position.right(1)})
+			game.onTick(250,"moverseBala",{position = position.right(1)})
 		}
 	}
 	
@@ -241,7 +250,17 @@ class Zombie{
 	
 	
 	
-	method image() = "zombie.png"
+	method image(){
+		if (vida == 3){
+			return "zombie.png"
+		}
+		if (vida == 2){
+			return "zombieGolpeado.png"
+		}
+		else {
+			return "zombiePorMorir.png"
+		}
+	}
 
 	
 	method chocoConEagle(){
@@ -265,29 +284,37 @@ class Zombie{
 	
 }
 
+
+
 object carteldeDerrota {
-	var property position=game.at(5,3)
-	method image()="findejuego.JPG"
+	var property position=game.origin()
+	method image()="gameOver.jpg"
 }
+
+
 
 object corazon1 {
 	var property position=game.at(12,6)
 	method image()="corazon.png"
 	method chocoConEagle(){}
+	method chocoConBala(bala){}
 }	
 
 object corazon2 {
 	var property position=game.at(12,5)
 	method image()="corazon.png"
 	method chocoConEagle(){}
+	method chocoConBala(bala){}
 	method perdiovida(){
 		game.removeVisual(self)}
+		
 }
 
 object corazon3 {
 	var property position=game.at(12,4)
 	method image()="corazon.png"
 	method chocoConEagle(){}
+	method chocoConBala(bala){}
 	method perdiovida(){
 		game.removeVisual(self)
 	}

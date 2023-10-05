@@ -5,9 +5,10 @@ import juego.*
 program Jugar{
 	game.width(13)
   	game.height(7)
-  	game.cellSize(150)
+  	game.cellSize(140)
   	game.title("Resident Eagle")
-  	game.boardGround("escenario.jpg")
+  	// game.boardGround("escenario.jpg")
+  	game.ground("cuadrado.png")
   	resident.iniciar()
   	game.start()
 }

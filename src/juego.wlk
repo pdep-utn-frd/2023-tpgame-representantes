@@ -25,9 +25,14 @@ object resident{
 			eagle.disparar()
 		})
 		
+		keyboard.r().onPressDo({
+			eagle.recargar()
+		})
+		
 		self.generarEnemigos()
 		
 		self.vidas()
+		
 		
 		
 	}
@@ -55,9 +60,9 @@ object resident{
 		)
 	}
 	
-	method eliminarTodo(){
-		(eagle.balas()).forEach{ b => game.removeVisual(b)}
-	}
+	// method eliminarTodo(){
+		//(eagle.balas()).forEach{ b => game.removeVisual(b)}
+	//}
 	//tablero
 	
 	method vidas(){
@@ -89,7 +94,7 @@ object eagle{
 	var property vida = 3
 	var property luz = 100
 	var property ultimaPosicion = 'w'
-	const property balas = []
+	var property recarga = 0
 	
 	method image(){
 		if (ultimaPosicion == 'a'){
@@ -105,14 +110,16 @@ object eagle{
 	method chocoConBala(bala){}
 	
 	method disparar(){
-		
+		if (recarga < 5) {
 		const bala = new Bala(position = self.positionSiguiente(),orientacion = self.ultimaPosicion())
 		game.addVisual(bala)
 		bala.moverse(ultimaPosicion)
-		balas.add(bala)//para despues eliminarlas todas
 		game.onCollideDo(bala,{algo => algo.chocoConBala(bala)}) 
-		
+		recarga = recarga + 1
+		game.schedule(2000,{game.removeVisual(bala)})  //SE LAGUEA 
+		}
 	}
+	
 	
 	method moverArriba(){
 		if (position.y()==6)
@@ -178,6 +185,12 @@ object eagle{
 		return position.y()
 	}
 	
+	
+	method recargar(){
+		recarga = 0
+	}
+	
+	
 	method reiniciar(){
 		position = game.origin()
 		vida = 3
@@ -226,12 +239,11 @@ class Zombie{
 	var property position
 	var property vida = 3
 	
-	
 	method perseguir(){
 		game.onTick(3000,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
 	}
 	
-	method moverse(destinoX,destinoY){// error, se mueven en diagonal
+	method moverse(destinoX,destinoY){// error, se mueven en diagonal preguntar como cambiarlo
 		position = game.at(
 			if (position.x() > destinoX){
 				position.x() - 1
@@ -291,10 +303,13 @@ class Zombie{
 }
 
 class MegaZombie inherits Zombie {
-	override method vida()=10 
+	
+	// preguntar como hacer para cambiar la vida
+	
 	override method image(){
 		return "NuevoMegazombie.png"
 	}
+	
 	override method morir(){
 		game.removeVisual(self)
 		const zombie = new Zombie(position = self.position())

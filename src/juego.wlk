@@ -324,6 +324,7 @@ class Zombie{
 	method chocoConBala(bala){
 		vida = vida - 1
 		game.removeVisual(bala)
+		game.removeTickEvent("moverseBala")
 		if (vida == 0){
 			self.morir()
 		}
@@ -333,6 +334,7 @@ class Zombie{
 	
 	method morir(){
 		game.removeVisual(self)
+		game.removeTickEvent("perseguir")
 	}
 	
 	

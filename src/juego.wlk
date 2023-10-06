@@ -88,11 +88,11 @@ object resident{
 		keyboard.enter().onPressDo({self.reiniciar()})
 	}
 	 
-method reiniciar(){
-	game.clear()
-	eagle.reiniciar()
-	self.iniciar()
-}
+	method reiniciar(){
+		game.clear()
+		eagle.reiniciar()
+		self.iniciar()
+	}
 	
 	
 }
@@ -232,28 +232,28 @@ class Bala{
 	method cambiarPosicionW(){
 		if (position.y() > 8){
 				game.removeVisual(self)
-				game.removeTickEvent("moverseBala")
+				game.removeTickEvent("moverseBalaw")
 			} 
 		position = position.up(1)
 	}
 	method cambiarPosicionA(){
 		if (position.x() < 0){
 				game.removeVisual(self)
-				game.removeTickEvent("moverseBala")
+				game.removeTickEvent("moverseBalaa")
 			} 
 		position = position.left(1)
 	}
 	method cambiarPosicionS(){
 		if (position.y() < 0){
 				game.removeVisual(self)
-				game.removeTickEvent("moverseBala")
+				game.removeTickEvent("moverseBalas")
 			} 
 		position = position.down(1)
 	}
 	method cambiarPosicionD(){
 		if (position.x() > 14){
 				game.removeVisual(self)
-				game.removeTickEvent("moverseBala")
+				game.removeTickEvent("moverseBalad")
 			} 
 		position = position.right(1)
 	}
@@ -263,18 +263,18 @@ class Bala{
 	
 	method moverse(ultimaPos){
 		if (ultimaPos == 'w'){
-			game.onTick(100,"moverseBala",{self.cambiarPosicionW()})
+			game.onTick(100,"moverseBalaw",{self.cambiarPosicionW()})
 		}
 		else if (ultimaPos == 'a'){
-			game.onTick(100,"moverseBala",{self.cambiarPosicionA()})
+			game.onTick(100,"moverseBalaa",{self.cambiarPosicionA()})
 			
 		}
 		else if (ultimaPos == 's'){
-			game.onTick(100,"moverseBala",{self.cambiarPosicionS()})
+			game.onTick(100,"moverseBalas",{self.cambiarPosicionS()})
 	
 		}
 		else{
-			game.onTick(100,"moverseBala",{self.cambiarPosicionD()})
+			game.onTick(100,"moverseBalad",{self.cambiarPosicionD()})
 	
 		}
 	}
@@ -323,8 +323,20 @@ class Zombie{
 	
 	method chocoConBala(bala){
 		vida = vida - 1
+		if (bala.orientacion() == 'w'){
+		game.removeTickEvent("moverseBalaw")
+		}
+		else if (bala.orientacion() == 'a'){
+		game.removeTickEvent("moverseBalaa")
+		}
+		else if (bala.orientacion() == 's'){
+		game.removeTickEvent("moverseBalas")
+		}
+		else if (bala.orientacion() == 'd'){
+		game.removeTickEvent("moverseBalad")
+		}
 		game.removeVisual(bala)
-		game.removeTickEvent("moverseBala")
+		
 		if (vida == 0){
 			self.morir()
 		}

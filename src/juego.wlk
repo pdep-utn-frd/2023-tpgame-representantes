@@ -35,7 +35,7 @@ object resident{
 		})
 		
 		keyboard.r().onPressDo({
-			eagle.recargar()
+		eagle.recargar()
 		})
 		
 		self.generarEnemigos()
@@ -263,18 +263,18 @@ class Bala{
 	
 	method moverse(ultimaPos){
 		if (ultimaPos == 'w'){
-			game.onTick(100,"moverseBalaw",{self.cambiarPosicionW()})
+			game.onTick(50,"moverseBalaw",{self.cambiarPosicionW()})
 		}
 		else if (ultimaPos == 'a'){
-			game.onTick(100,"moverseBalaa",{self.cambiarPosicionA()})
+			game.onTick(50,"moverseBalaa",{self.cambiarPosicionA()})
 			
 		}
 		else if (ultimaPos == 's'){
-			game.onTick(100,"moverseBalas",{self.cambiarPosicionS()})
+			game.onTick(50,"moverseBalas",{self.cambiarPosicionS()})
 	
 		}
 		else{
-			game.onTick(100,"moverseBalad",{self.cambiarPosicionD()})
+			game.onTick(50,"moverseBalad",{self.cambiarPosicionD()})
 	
 		}
 	}
@@ -324,19 +324,19 @@ class Zombie{
 	method chocoConBala(bala){
 		vida = vida - 1
 		if (bala.orientacion() == 'w'){
-		game.removeTickEvent("moverseBalaw")
+		bala.position(game.at(0,8))
 		}
 		else if (bala.orientacion() == 'a'){
-		game.removeTickEvent("moverseBalaa")
+		bala.position(game.at(-1,0))
 		}
 		else if (bala.orientacion() == 's'){
-		game.removeTickEvent("moverseBalas")
+		bala.position(game.at(0,-1))
 		}
 		else if (bala.orientacion() == 'd'){
-		game.removeTickEvent("moverseBalad")
+		bala.position(game.at(14,0))
 		}
-		game.removeVisual(bala)
-		
+	//	game.removeVisual(bala)
+			
 		if (vida == 0){
 			self.morir()
 		}

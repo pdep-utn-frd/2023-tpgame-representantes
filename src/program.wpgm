@@ -3,12 +3,12 @@ import juego.*
 
 
 program Jugar{
-	game.width(13)
+	game.width(13) //1820x980
   	game.height(7)
   	game.cellSize(140)
   	game.title("Resident Eagle")
-  	// game.boardGround("escenario.jpg")
-  	game.ground("cuadrado.png")
+  	game.boardGround("fondoOscuro.jpeg")
+  	// game.ground("cuadrado.png")
   	resident.iniciar()
   	game.start()
 }

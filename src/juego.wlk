@@ -371,7 +371,7 @@ class MegaZombie inherits Zombie {
 
 object carteldeDerrota {
 	var property position=game.origin()
-	method image()="gameOver.jpg"
+	method image()="gameOver1.png"
 }
 
 

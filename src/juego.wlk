@@ -49,7 +49,7 @@ object resident{
 	method generarEnemigos(){
 		game.onTick(10000,"agregarZombie",{self.agregarZombie()})
 		game.onTick(20000,"agregarMegaZombie",{self.agregarMegaZombie()})
-		game.onTick(15000,"agregarAguila",{self.agregarAguila()})
+		game.onTick(7000,"agregarAguila",{self.agregarAguila()})
 	}
 	
 	method agregarZombie(){
@@ -359,7 +359,15 @@ class Zombie{
 
 class MegaZombie inherits Zombie {
 	override method image(){
-		return "NuevoMegazombie.png"
+		if (vida <= 10 && vida > 7){
+			return "zombiechatgpt.png"
+		}
+		if (vida <= 7 && vida > 3){
+			return "zombiechatgpt1.png"
+		}
+		else {
+			return "zombiechatgpt2.png"
+		}
 	}
 	
 	override method morir(){
@@ -374,10 +382,14 @@ class Aguila inherits Zombie{
 	override method image(){
 		return "aguila.png"
 	}
+	
+	override method perseguir(){
+		game.onTick(1000,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
+	}
 	override method moverse(destinoX,destinoY){
 		position = game.at(
-			position.x() + (destinoX - position.x())/1.3,
-			position.y() + (destinoY - position.y())/1.3	
+			position.x() + (destinoX - position.x())/1.9,
+			position.y() + (destinoY - position.y())/1.9
 		)
 	}
 }

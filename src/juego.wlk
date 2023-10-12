@@ -49,15 +49,21 @@ object resident{
 	method generarEnemigos(){
 		game.onTick(10000,"agregarZombie",{self.agregarZombie()})
 		game.onTick(20000,"agregarMegaZombie",{self.agregarMegaZombie()})
+		game.onTick(15000,"agregarAguila",{self.agregarAguila()})
 	}
 	
 	method agregarZombie(){
-		const zombie = new Zombie(position = self.posicionAlAzar())
+		const zombie = new Zombie(position = self.posicionAlAzar(),vida=3)
 		game.addVisual(zombie)
 		zombie.perseguir()
 	}
 	method agregarMegaZombie(){
-		const zombie = new MegaZombie(position = self.posicionAlAzar())
+		const zombie = new MegaZombie(position = self.posicionAlAzar(),vida=10)
+		game.addVisual(zombie)
+		zombie.perseguir()
+	}
+	method agregarAguila(){
+		const zombie = new Aguila(position = self.posicionAlAzar(),vida=2)
 		game.addVisual(zombie)
 		zombie.perseguir()
 	}
@@ -290,7 +296,7 @@ class Bala{
 
 class Zombie{
 	var property position
-	var property vida = 3
+	var property vida 
 	
 	method perseguir(){
 		game.onTick(3000,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
@@ -352,22 +358,29 @@ class Zombie{
 }
 
 class MegaZombie inherits Zombie {
-	
-	// preguntar como hacer para cambiar la vida
-	
 	override method image(){
 		return "NuevoMegazombie.png"
 	}
 	
 	override method morir(){
 		game.removeVisual(self)
-		const zombie = new Zombie(position = self.position())
+		const zombie = new Zombie(position = self.position(),vida=3)
 		game.addVisual(zombie)
 		zombie.perseguir()
 	}
 	
 }
-
+class Aguila inherits Zombie{
+	override method image(){
+		return "aguila.png"
+	}
+	override method moverse(destinoX,destinoY){
+		position = game.at(
+			position.x() + (destinoX - position.x())/1.3,
+			position.y() + (destinoY - position.y())/1.3	
+		)
+	}
+}
 
 object carteldeDerrota {
 	var property position=game.origin()

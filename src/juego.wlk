@@ -101,7 +101,7 @@ object resident{
 
 object eagle{
 	var property position = game.origin()
-	var property vida = 10000
+	var property vida = 3
 	var property ultimaPosicion = 'w'
 	var property recarga = 0
 	var property apuntado = 'd'

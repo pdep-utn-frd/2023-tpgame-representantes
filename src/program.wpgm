@@ -11,4 +11,5 @@ program Jugar{
   	// game.ground("cuadrado.png")
   	resident.iniciar()
   	game.start()
+  
 }

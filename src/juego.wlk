@@ -74,13 +74,7 @@ object resident{
 			1.randomUpTo(game.height())
 		)
 	}
-	
-	//method eliminarBalas(){
-		//(eagle.balas()).forEach{ b => game.removeVisual(b)}
-		//game.removeTickEvent("moverseBala")
-	//}
-	//tablero
-	
+		
 	method vidas(){
 		game.addVisual(corazon1)
 		game.addVisual(corazon2)
@@ -100,6 +94,14 @@ object resident{
 	}
 	
 	
+	method jefeFinal(){
+		game.addVisual(pantallaJefe)
+		game.schedule(10000,{=> game.removeVisual(pantallaJefe)})
+		game.removeTickEvent("agregarZombie")
+		game.removeTickEvent("agregarMegaZombie")
+		game.removeTickEvent("agregarAguila")
+	}
+	
 }
 
 
@@ -111,6 +113,7 @@ object eagle{
 	var property recarga = 0
 	var property apuntado = 'd'
     var property balacera =[]
+    var property puntaje = 0
 	
 	method image(){
 		if (ultimaPosicion == 'a' ||apuntado == 'a'){
@@ -136,6 +139,14 @@ object eagle{
 		balacera.add(bala)
 		}
 	}
+	
+	method sumarPunto(){
+		puntaje = puntaje + 1
+		if(puntaje == 20){
+			resident.jefeFinal()
+		}
+	}
+	
 	
 	
 	method moverArriba(){
@@ -350,6 +361,7 @@ class Zombie{
 	
 	
 	method morir(){
+		eagle.sumarPunto()
 		game.removeVisual(self)
 		game.removeTickEvent("perseguir")
 	}
@@ -358,6 +370,7 @@ class Zombie{
 }
 
 class MegaZombie inherits Zombie {
+	
 	override method image(){
 		if (vida <= 10 && vida > 7){
 			return "zombiechatgpt.png"
@@ -427,3 +440,22 @@ object corazon3 {
 		game.removeVisual(self)
 	}
 }
+
+
+
+object pantallaJefe{
+	var property position= game.origin()
+	method image() = "fondoDiablo1.jpg"
+	method chocoConEagle(){}
+	method chocoConBala(bala){}
+}
+
+
+
+
+
+
+
+
+
+

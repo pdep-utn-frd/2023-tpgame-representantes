@@ -223,9 +223,14 @@ object eagle{
 		position = game.origin()
 		vida = 3
 		ultimaPosicion = 'w'
-		 recarga = 0
+		recarga = 0
 	 	apuntado = 'd'
-    	 balacera =[]
+    	balacera =[]
+    	puntaje = 0
+	}
+	
+	method inmortal(){
+		vida =10000000
 	}
 }
 

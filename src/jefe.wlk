@@ -68,6 +68,7 @@ object jefe{
 		game.removeTickEvent("perseguirJefe")
 		game.removeTickEvent("generarPrisionero")
 		game.addVisual(final)
+		eagle.inmortal()
 		final.final()
 		
 		

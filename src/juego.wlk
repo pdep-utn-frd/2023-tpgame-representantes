@@ -101,7 +101,7 @@ object resident{
 
 object eagle{
 	var property position = game.origin()
-	var property vida = 3
+	var property vida = 10000
 	var property ultimaPosicion = 'w'
 	var property recarga = 0
 	var property apuntado = 'd'
@@ -120,6 +120,7 @@ object eagle{
 
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
+	method chocoConBola(algunFuego){}
 	
 	method disparar(direccion){
 		if (recarga < 5) {
@@ -294,6 +295,7 @@ class Bala{
 	
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
+	method chocoConBola(algunFuego){}
 	
 	
 	
@@ -414,6 +416,7 @@ object corazon1 {
 	method image()="corazon.png"
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
+	method chocoConBola(algunFuego){}
 }	
 
 object corazon2 {
@@ -421,6 +424,7 @@ object corazon2 {
 	method image()="corazon.png"
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
+	method chocoConBola(algunFuego){}
 	method perdiovida(){
 		game.removeVisual(self)}
 		
@@ -431,6 +435,7 @@ object corazon3 {
 	method image()="corazon.png"
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
+	method chocoConBola(algunFuego){}
 	method perdiovida(){
 		game.removeVisual(self)
 	}

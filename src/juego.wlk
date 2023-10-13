@@ -355,7 +355,7 @@ class Zombie{
 		}
 	}
 	
-	
+	method chocoConBola(algunFuego){}
 	
 	method morir(){
 		eagle.sumarPunto()

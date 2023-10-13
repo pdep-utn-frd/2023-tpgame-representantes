@@ -18,8 +18,8 @@ object jefe{
 	}
 	
 	method perseguir(){
-		game.onTick(3500,"perseguir",{self.moverse(eagle.positionX(),eagle.positionY())})
-		game.schedule(2000,{=> self.borrar()})
+		game.onTick(2300,"perseguirJefe",{self.moverse(eagle.positionX(),eagle.positionY())})
+		game.schedule(1300,{=> self.borrar()})
 	}
 	
 	method moverse(destinoX,destinoY){
@@ -65,7 +65,12 @@ object jefe{
 	
 	method morir(){
 		game.removeVisual(self)
-		game.removeTickEvent("perseguir")
+		game.removeTickEvent("perseguirJefe")
+		game.removeTickEvent("generarPrisionero")
+		game.addVisual(final)
+		final.final()
+		
+		
 	}
 	
 	method chocoConBala(bala){
@@ -81,7 +86,8 @@ object jefe{
 		}
 		else if (bala.orientacion() == 'd'){
 		bala.position(game.at(14,0))
-		}		
+		}
+				
 		if (vida == 0){
 			self.morir()
 		}
@@ -89,12 +95,23 @@ object jefe{
 	
 	
 	method borrar(){
-		game.onTick(3500,"borrarFuego",{self.borrarFuego()})	
+		game.onTick(2300,"borrarFuego",{self.borrarFuego()})	
 	}
 	
 	method borrarFuego(){
 		fuego.forEach({x=>game.removeVisual(x)})
 		fuego.clear()
+	}
+	
+	method generarPrisioneros(){
+		game.onTick(10000,"generarPrisionero",{self.generarPrisionero()})
+	}
+	
+	method generarPrisionero(){
+		const prisionero = new Prisionero(position = resident.posicionAlAzar(),vida=3)
+		game.addVisual(prisionero)
+		prisionero.perseguir()
+		 
 	}
 }
 
@@ -136,18 +153,18 @@ class Bola{
 	
 	method moverse(ultimaPos){
 		if (ultimaPos == 'w'){
-			game.onTick(300,"moverseBalaw",{self.cambiarPosicionW()})
+			game.onTick(200,"moverseBalaw",{self.cambiarPosicionW()})
 		}
 		else if (ultimaPos == 'a'){
-			game.onTick(300,"moverseBalaa",{self.cambiarPosicionA()})
+			game.onTick(200,"moverseBalaa",{self.cambiarPosicionA()})
 			
 		}
 		else if (ultimaPos == 's'){
-			game.onTick(300,"moverseBalas",{self.cambiarPosicionS()})
+			game.onTick(200,"moverseBalas",{self.cambiarPosicionS()})
 	
 		}
 		else{
-			game.onTick(300,"moverseBalad",{self.cambiarPosicionD()})
+			game.onTick(200,"moverseBalad",{self.cambiarPosicionD()})
 	
 		}
 	}
@@ -164,6 +181,21 @@ class Bola{
 
 
 
+class Prisionero inherits Zombie{
+	override method image(){
+		if (vida == 3){
+			return "prisionero.png"
+		}
+		else if (vida == 2){
+			return "prisionero2.png"
+		}
+		else{
+			return "prisionero3.png"
+		}
+	}
+	
+	
+}
 
 
 
@@ -195,6 +227,7 @@ object puerta{
 		game.schedule(5000,{=> jefe.perseguir()})
 		game.removeVisual(puerta1)
 		game.removeVisual(self)
+		game.schedule(10000,{=> jefe.generarPrisioneros()})
 	}
 	
 	
@@ -220,4 +253,13 @@ object pantallaJefe{
 	method image() = "fondoDiablo1.jpg"
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
+}
+
+
+object final{
+	method image() = ""
+	
+	method final(){
+		
+	}
 }

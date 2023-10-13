@@ -1,5 +1,6 @@
 import wollok.game.*
 import juego.*
+import jefe.*
 
 
 program Jugar{

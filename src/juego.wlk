@@ -1,4 +1,5 @@
 import wollok.game.*
+import jefe.*
 
 object resident{
 	
@@ -94,14 +95,6 @@ object resident{
 	}
 	
 	
-	method jefeFinal(){
-		game.addVisual(pantallaJefe)
-		game.schedule(10000,{=> game.removeVisual(pantallaJefe)})
-		game.removeTickEvent("agregarZombie")
-		game.removeTickEvent("agregarMegaZombie")
-		game.removeTickEvent("agregarAguila")
-	}
-	
 }
 
 
@@ -141,9 +134,11 @@ object eagle{
 	}
 	
 	method sumarPunto(){
-		puntaje = puntaje + 1
-		if(puntaje == 20){
-			resident.jefeFinal()
+		puntaje = puntaje + 1 // puse solo 3 para probarlo
+		if(puntaje == 3){
+			game.addVisual(puerta)
+			game.addVisual(puerta1)
+			puerta.preJefeFinal()
 		}
 	}
 	
@@ -443,12 +438,7 @@ object corazon3 {
 
 
 
-object pantallaJefe{
-	var property position= game.origin()
-	method image() = "fondoDiablo1.jpg"
-	method chocoConEagle(){}
-	method chocoConBala(bala){}
-}
+
 
 
 

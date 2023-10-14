@@ -91,6 +91,7 @@ object resident{
 	method reiniciar(){
 		game.clear()
 		eagle.reiniciar()
+		jefe.reiniciar()
 		self.iniciar()
 	}
 	

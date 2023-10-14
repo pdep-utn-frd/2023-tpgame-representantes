@@ -112,8 +112,12 @@ object jefe{
 		const prisionero = new Prisionero(position = resident.posicionAlAzar(),vida=3)
 		game.addVisual(prisionero)
 		prisionero.perseguir()
-		 
-	}
+		 }
+	 method  reiniciar(){
+	 	vida = 50
+		position = game.center()
+		fuego = []
+	 }
 }
 
 

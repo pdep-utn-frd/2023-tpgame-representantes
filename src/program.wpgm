@@ -4,11 +4,14 @@ import jefe.*
 
 
 program Jugar{
+	const musica= game.sound("preview.mp3")
 	game.width(13) //1820x980
   	game.height(7)
   	game.cellSize(140)
   	game.title("Resident Eagle")
   	game.boardGround("fondoOscuro.jpeg")
+  	musica.shouldLoop(true)
+  	game.schedule(500,{musica.play()})
   	// game.ground("cuadrado.png")
   	resident.iniciar()
   	game.start()

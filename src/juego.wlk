@@ -87,6 +87,11 @@ object resident{
 		game.addVisual(carteldeDerrota)
 		keyboard.enter().onPressDo({self.reiniciar()})
 	}
+	method final(){
+		game.clear()
+		game.addVisual(cartelfinal)
+		keyboard.enter().onPressDo({self.reiniciar()})
+	}
 	 
 	method reiniciar(){
 		game.clear()
@@ -231,7 +236,7 @@ object eagle{
 	}
 	
 	method inmortal(){
-		vida =10000000
+		vida = 10000000
 	}
 }
 
@@ -447,7 +452,9 @@ object corazon3 {
 	}
 }
 
-
+object cartelfinal{
+	method image()=""
+}
 
 
 

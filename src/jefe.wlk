@@ -3,7 +3,7 @@ import juego.*
 
 
 object jefe{
-	var property vida = 50
+	var property vida = 2
 	var property position = game.center()
 	var property fuego = []
 	
@@ -64,15 +64,8 @@ object jefe{
 	}
 	
 	method morir(){
-		game.removeVisual(self)
-		game.removeTickEvent("perseguirJefe")
-		game.removeTickEvent("generarPrisionero")
-		game.addVisual(final)
-		eagle.inmortal()
-		final.final()
-		
-		
-	}
+		resident.final()
+		}
 	
 	method chocoConBala(bala){
 		vida = vida - 1
@@ -261,10 +254,3 @@ object pantallaJefe{
 }
 
 
-object final{
-	method image() = ""
-	
-	method final(){
-		
-	}
-}

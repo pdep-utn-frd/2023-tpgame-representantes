@@ -4,7 +4,7 @@ import jefe.*
 
 
 program Jugar{
-	const musica= game.sound("preview.mp3")
+	const musica= game.sound("musicaJuego.mp3")
 	game.width(13) //1820x980
   	game.height(7)
   	game.cellSize(140)

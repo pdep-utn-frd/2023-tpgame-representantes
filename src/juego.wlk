@@ -453,7 +453,9 @@ object corazon3 {
 }
 
 object cartelfinal{
-	method image()="final.jpeg"
+	var property position = game.origin()
+	
+	method image()="youWin.jpeg"
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
 	method chocoConBola(algunFuego){}

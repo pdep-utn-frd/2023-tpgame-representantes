@@ -219,8 +219,8 @@ object puerta{
 	}
 	
 	method jefeFinal(){
-		//const musica= game.sound("")
-	//	musica.play()
+		const musica1= game.sound("ruidoDeMonstruo.mp3")
+		musica1.play()
 		game.addVisual(pantallaJefe)
 		game.schedule(5000,{=> game.removeVisual(pantallaJefe)})
 		game.schedule(5000,{=> game.addVisual(jefe)})

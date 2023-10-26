@@ -453,7 +453,10 @@ object corazon3 {
 }
 
 object cartelfinal{
-	method image()=""
+	method image()="final.jpeg"
+	method chocoConEagle(){}
+	method chocoConBala(bala){}
+	method chocoConBola(algunFuego){}
 }
 
 

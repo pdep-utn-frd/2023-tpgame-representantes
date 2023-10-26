@@ -219,6 +219,8 @@ object puerta{
 	}
 	
 	method jefeFinal(){
+		//const musica= game.sound("")
+	//	musica.play()
 		game.addVisual(pantallaJefe)
 		game.schedule(5000,{=> game.removeVisual(pantallaJefe)})
 		game.schedule(5000,{=> game.addVisual(jefe)})

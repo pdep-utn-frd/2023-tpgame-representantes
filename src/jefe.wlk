@@ -3,7 +3,7 @@ import juego.*
 
 
 object jefe{
-	var property vida = 2
+	var property vida = 50
 	var property position = game.center()
 	var property fuego = []
 	

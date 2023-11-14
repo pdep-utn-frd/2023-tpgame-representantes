@@ -422,35 +422,21 @@ object carteldeDerrota {
 
 
 
-object corazon1 {
-	var property position=game.at(12,6)
-	method image()="corazon.png"
-	method chocoConEagle(){}
-	method chocoConBala(bala){}
-	method chocoConBola(algunFuego){}
-}	
+const corazon1 = new Corazon(position = game.at(12,6))
+const corazon2 = new Corazon(position = game.at(12,5))
+const corazon3 = new Corazon(position = game.at(12,4))
 
-object corazon2 {
-	var property position=game.at(12,5)
+
+class Corazon {
+	var property position 
 	method image()="corazon.png"
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
 	method chocoConBola(algunFuego){}
 	method perdiovida(){
 		game.removeVisual(self)}
-		
 }
 
-object corazon3 {
-	var property position=game.at(12,4)
-	method image()="corazon.png"
-	method chocoConEagle(){}
-	method chocoConBala(bala){}
-	method chocoConBola(algunFuego){}
-	method perdiovida(){
-		game.removeVisual(self)
-	}
-}
 
 object cartelfinal{
 	var property position = game.origin()

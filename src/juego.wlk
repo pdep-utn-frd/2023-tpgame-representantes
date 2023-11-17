@@ -25,7 +25,7 @@ object resident{
 			eagle.disparar('w')
 		})
 		keyboard.down().onPressDo({
-			eagle.disparar('s')
+		eagle.disparar('s')
 		})
 		keyboard.right().onPressDo({
 			eagle.disparar('d')
@@ -69,7 +69,7 @@ object resident{
 		zombie.perseguir()
 	}
 	
-	method posicionAlAzar(){ //HAY QUE DESARROLLAR ESTO
+	method posicionAlAzar(){ 
 		return game.at(
 			1.randomUpTo(game.width()),
 			1.randomUpTo(game.height())
@@ -103,34 +103,28 @@ object resident{
 	
 }
 
-
-
 object eagle{
 	var property position = game.origin()
 	var property vida = 3
-	var property ultimaPosicion = 'w'
+	var property imagen="black.png"
 	var property recarga = 0
-	var property apuntado = 'd'
     var property balacera =[]
     var property puntaje = 0
-	
 	method image(){
-		if (ultimaPosicion == 'a' ||apuntado == 'a'){
-			return "black1.png"
-		}
-		else {
-			return "black.png"
-		}
-	} 
-	
+		return imagen
+	}
+	method cambiarimagen(picture){
+		imagen=picture
+	}
 
 	method chocoConEagle(){}
 	method chocoConBala(bala){}
 	method chocoConBola(algunFuego){}
 	
 	method disparar(direccion){
-		if (recarga < 5) {
-		apuntado = direccion
+		if(direccion=='d'){self.cambiarimagen("black.png")}else {self.cambiarimagen("black1.png")}
+		const maximobalas=5
+		if (recarga < maximobalas) {
 		const bala = new Bala(position = self.position(),orientacion = direccion)
 		game.addVisual(bala)
 		bala.moverse(direccion)
@@ -141,7 +135,7 @@ object eagle{
 	}
 	
 	method sumarPunto(){
-		puntaje = puntaje + 1 // puse solo 3 para probarlo
+		puntaje = puntaje + 1 
 		if(puntaje == 3){
 			game.addVisual(puerta)
 			game.addVisual(puerta1)
@@ -152,51 +146,29 @@ object eagle{
 	
 	
 	method moverArriba(){
-		if (position.y()==6)
-		{ultimaPosicion = 'w'}
-		else
-		{ultimaPosicion = 'w'
+		if (position.y()!=6)
+		{
 		position = position.up(1)}
 	}
 	
 	method moverIzquierda(){
-		if (position.x()==0)
-		{ultimaPosicion = 'a'}
-		else
-		{ultimaPosicion = 'a'
+		
+		if (position.x()!=0)
+		{
+		self.cambiarimagen("black1.png")
 		position = position.left(1)}
 	}
 	method moverAbajo(){
-		if (position.y()==0)
-		{ultimaPosicion = 's'}
-		else
-		{ultimaPosicion = 's'
+		if (position.y()!=0)
+		{
 		position = position.down(1)}
 	}
 	method moverDerecha(){
-		if (position.x()==12)
-		{ultimaPosicion = 'd'}
-		else
-		{ultimaPosicion = 'd'
+		if (position.x()!=12)
+		{
+		self.cambiarimagen("black.png")
 		position = position.right(1)}
 	}
-	
-	
-	method positionSiguiente(){
-		if (ultimaPosicion == 'w'){
-			return position.up(1)
-		}
-		if (ultimaPosicion == 'a'){
-			return position.left(1)
-		}
-		if (ultimaPosicion == 's'){
-			return position.down(1)
-		}
-		else{
-			return position.right(1)
-		}
-	}
-	
 	method ataqueDeZombie(){
 		vida = vida - 1
 		if (self.vida() == 2)
@@ -228,15 +200,9 @@ object eagle{
 	method reiniciar(){
 		position = game.origin()
 		vida = 3
-		ultimaPosicion = 'w'
 		recarga = 0
-	 	apuntado = 'd'
     	balacera =[]
     	puntaje = 0
-	}
-	
-	method inmortal(){
-		vida = 10000000
 	}
 }
 
@@ -256,28 +222,28 @@ class Bala{
 	
 	method cambiarPosicionW(){
 		if (position.y() > 8){
-			//	game.removeVisual(self)
+	
 				game.removeTickEvent("moverseBalaw")
 			} 
 		position = position.up(1)
 	}
 	method cambiarPosicionA(){
 		if (position.x() < 0){
-				//game.removeVisual(self)
+				
 			game.removeTickEvent("moverseBalaa")
 			} 
 		position = position.left(1)
 	}
 	method cambiarPosicionS(){
 		if (position.y() < 0){
-			//	game.removeVisual(self)
+			
 				game.removeTickEvent("moverseBalas")
 			} 
 		position = position.down(1)
 	}
 	method cambiarPosicionD(){
 		if (position.x() > 14){
-				//game.removeVisual(self)
+				
 				game.removeTickEvent("moverseBalad")
 			} 
 		position = position.right(1)

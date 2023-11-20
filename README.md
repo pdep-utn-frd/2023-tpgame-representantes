@@ -2,7 +2,7 @@
 Resident Eagle es un juego de un solo jugador, en el cual el personaje principal Eagle es un superviviente del apocalipsis. Eagle cuenta con una pistola para poder defenderse de las amenazas. Hay una variedad de enemigos con peliculiaridades que los hacen distintos y peligrosos. 
 # JUGABILIDAD
 EL personaje principal se mueve con las teclas: 'w' arriba, 's' abajo,'a' izquierda, 'd' derecha. Se dispara con las flechas: 'up' dispara arriba,'down' dispara abajo,'left'dispara a la izquierda,'right' dispara a la derecha. El cargador del arma es de 5 balas, cuando se agotan tendras que tocar la 'r' de recargar,y asi tendras 5 balas en tu cargador para continuar disparando.
-#AUTORES
+# AUTORES
 Lautaro Stuve
 Joaquin Landra
 Matias Bonesi

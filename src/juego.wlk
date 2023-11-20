@@ -136,7 +136,7 @@ object eagle{
 	
 	method sumarPunto(){
 		puntaje = puntaje + 1 
-		if(puntaje == 3){
+		if(puntaje == 30){
 			game.addVisual(puerta)
 			game.addVisual(puerta1)
 			puerta.preJefeFinal()

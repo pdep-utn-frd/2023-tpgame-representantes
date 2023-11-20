@@ -3,9 +3,9 @@ Resident Eagle es un juego de un solo jugador, en el cual el personaje principal
 # JUGABILIDAD
 EL personaje principal se mueve con las teclas: 'w' arriba, 's' abajo,'a' izquierda, 'd' derecha. Se dispara con las flechas: 'up' dispara arriba,'down' dispara abajo,'left'dispara a la izquierda,'right' dispara a la derecha. El cargador del arma es de 5 balas, cuando se agotan tendras que tocar la 'r' de recargar,y asi tendras 5 balas en tu cargador para continuar disparando.
 # AUTORES
-Lautaro Stuve
-Joaquin Landra
-Matias Bonesi
+-Lautaro Stuve
+-Joaquin Landra
+-Matias Bonesi
 ![image](https://github.com/pdep-utn-frd/2023-tpgame-representantes/assets/128098721/554cacc9-7041-411f-94e9-a22bbc4c3628)
 
 

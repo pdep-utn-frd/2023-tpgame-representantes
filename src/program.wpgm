@@ -14,6 +14,6 @@ program Jugar{
   	game.schedule(500,{musica.play()})
   	// game.ground("cuadrado.png")
   	resident.iniciar()
-  	game.start()
+  	game.start() 
   
 }
